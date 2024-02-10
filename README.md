@@ -1,1 +1,1 @@
-# backend
+# a backend for a store (allows the user to put his stuff up for sale)
