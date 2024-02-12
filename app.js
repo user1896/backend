@@ -1,6 +1,16 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
+// mongodb+srv://abderazak15:<password>@cluster0.fpoa31a.mongodb.net/?retryWrites=true&w=majority
+mongoose.connect('mongodb+srv://abderazak15:Magnum-4546@cluster0.fpoa31a.mongodb.net/?retryWrites=true&w=majority')
+	.then(()=>{
+		console.log('Successfully connected to Mongodb Atlas!')
+	})
+	.catch((error)=>{
+		console.log('Unable to connect to Mongodb Atlas!')
+		console.error(error)
+	})
 
 // A middleware that intercepts all incoming POST requests that has Content-Type "application/json" and parses there JSON body
 app.use(express.json());
@@ -65,6 +75,6 @@ We should always put "app.post" above "app.use" in the code when they have the s
 middlewares from top to bottom, so "app.use" will intercept all requests to that route.
 
 We won't have this problem of "app.use" intercepting requests in a certain route, if this route has only "app.get" and 
-"app.post" middlewares, so here both get requests and post requests get handdled properly by their respective middleware.
+"app.post" middlewares, so here both get requests and post requests get handdled properly by their respective middlewares.
 */
 module.exports = app;
