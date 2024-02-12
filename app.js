@@ -58,28 +58,21 @@ app.post('/api/stuff', (req, res, next) => {
 	);
 });
 
-// creating an API for when the frontend accesses the route "localhost:3000/api/stuff"
-app.use('/api/stuff', (req, res, next) => {
-  const stuff = [
-    {
-      _id: 'oeihfzeoi',
-      title: 'My first thing',
-      description: 'All of the info about my first thing',
-      imageUrl: '',
-      price: 4900,
-      userId: 'qsomihvqios',
-    },
-    {
-      _id: 'oeihfzeomoihi',
-      title: 'My second thing',
-      description: 'All of the info about my second thing',
-      imageUrl: '',
-      price: 2900,
-      userId: 'qsomihvqios',
-    },
-  ];
-  res.status(200).json(stuff); // the code 200 means we recieved the data successfully.
-	// whenever someone accesses this API he gets a response with the array "stuff" as json.
+// creating an API for when the frontend accesses the route "localhost:3000/api/stuff" to get data
+app.get('/api/stuff', (req, res, next) => {
+	Thing.find().then(
+    (things) => {
+      res.status(200).json(things); // We return two things:
+			// the code 200 which means that the request has succeeded.
+			// and a json object containing the things we retrieved from the database.
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
 	// The user accessed this route to get data from the backend, so we could have used "app.get" instead of "app.use".
 });
 
@@ -97,4 +90,5 @@ middlewares from top to bottom, so "app.use" will intercept all requests to that
 We won't have this problem of "app.use" intercepting requests in a certain route, if this route has only "app.get" and 
 "app.post" middlewares, so here both get requests and post requests get handdled properly by their respective middlewares.
 */
+
 module.exports = app;
