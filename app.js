@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Thing = require('./models/thing'); // Import our Mongoose model (Schema)
 
 const app = express();
 // mongodb+srv://abderazak15:<password>@cluster0.fpoa31a.mongodb.net/?retryWrites=true&w=majority
@@ -31,11 +32,30 @@ app.use((req, res, next) => {
 
 // A POST route that allows the frontend to send data to the backend (ex: users put objects for sell)
 app.post('/api/stuff', (req, res, next) => {
-  console.log(req.body); // log the data that was sent (we can save it in a database for example)
-	// after receiving data we must send back a response, or the request will hang.
-  res.status(201).json({ // 201 code is for successful resource creation.
-    message: 'Thing created successfully!'
+	// we recieve the data in req.body
+	const thing = new Thing({
+    title: req.body.title,
+    description: req.body.description,
+    imageUrl: req.body.imageUrl,
+    price: req.body.price,
+    userId: req.body.userId
   });
+	// after receiving data we must send back a response, or the request will hang.
+	thing.save().then( // the "save()" method saves the object into the data base and returns a promise
+		() => {
+			// sending a response when the data is created successfully
+			res.status(201).json({ // 201 code is for successful resource creation.
+				message: 'Post saved successfully!'
+			});
+		}
+	).catch(
+		(error) => {
+			// sending a response when we have an error
+			res.status(400).json({
+				error: error
+			});
+		}
+	);
 });
 
 // creating an API for when the frontend accesses the route "localhost:3000/api/stuff"
