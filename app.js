@@ -58,9 +58,9 @@ app.use('/api/stuff', (req, res, next) => {
       userId: 'qsomihvqios',
     },
   ];
-  res.status(200).json(stuff); // whenever someone accesses this API he gets a response with the array "stuff" as json.
+  res.status(200).json(stuff); // the code 200 means we recieved the data successfully.
+	// whenever someone accesses this API he gets a response with the array "stuff" as json.
 	// The user accessed this route to get data from the backend, so we could have used "app.get" instead of "app.use".
-	// the code 200 means we recieved the data successfully.
 });
 
 // A "get request" wants to get data from the api (ex: the API reads from the database then returns a response to the frontend)
