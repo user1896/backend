@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const Thing = require('./models/thing'); // Import our Mongoose model (Schema)
 
 const app = express();
+// connect mangoose to Atlas
 // mongodb+srv://abderazak15:<password>@cluster0.fpoa31a.mongodb.net/?retryWrites=true&w=majority
-mongoose.connect('mongodb+srv://abderazak15:Magnum-4546@cluster0.fpoa31a.mongodb.net/?retryWrites=true&w=majority')
+// mongoose.connect('mongodb+srv://abderazak15:Magnum-4546@cluster0.fpoa31a.mongodb.net/?retryWrites=true&w=majority')
+// connect mangoose localy
+mongoose.connect('mongodb://127.0.0.1:27017/myapp') // database name is "myapp", it will be created if it does not exist
 	.then(()=>{
 		console.log('Successfully connected to Mongodb Atlas!')
 	})
