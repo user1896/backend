@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const stuffRoutes = require('./routes/stuff');
+const userRoutes = require('./routes/user');
 
 const app = express();
 // connect mangoose to Atlas
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/stuff', stuffRoutes); // once we have a request to the api route '/api/stuff', "stuffRoutes" will handle it.
+app.use('/api/auth', userRoutes); // once we have a request to the api route '/api/auth', "userRoutes" will handle it.
 
 app.use((req, res) => {
   res.json({ message: 'everything is working fine' }); 
