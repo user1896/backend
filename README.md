@@ -13,4 +13,7 @@ If we want to use Express we have to install it in our project, so we open the c
 * npm install express
 we notice two things created: the folder "node_modules", and the file package-lock.json
 
-If we want to push this to a github repository, don't forge to include the file ".gitignore" containing the line "node_modules" to avoid pushing this large folder to your remote repo.
+If we want to push this to a github repository, don't forget to include the file ".gitignore" containing the line "node_modules" to avoid pushing this large folder to your remote repo.
+
+To implement token based authentication install the package "JSON Web Tokens" (JWT):
+* npm install jsonwebtoken
