@@ -15,5 +15,11 @@ we notice two things created: the folder "node_modules", and the file package-lo
 
 If we want to push this to a github repository, don't forget to include the file ".gitignore" containing the line "node_modules" to avoid pushing this large folder to your remote repo.
 
+To make sure that new data entered to Mangodb is unique we use the package:
+* npm install mongoose-unique-validator
+
+To encrypt the passwords we use the package "bcrypt"
+* npm install bcrypt
+
 To implement token based authentication install the package "JSON Web Tokens" (JWT):
 * npm install jsonwebtoken

@@ -49,7 +49,8 @@ exports.login = (req, res, next) => {
           // If we reach this, it means the password is correct, so now we encode a new token for the user
           const token = jwt.sign(
             { userId: user._id },
-            'RANDOM_TOKEN_SECRET',
+            'RANDOM_TOKEN_SECRET', // a secrect key for hashing, recommended to be a long string. This string is what ensures
+            // that we can't build these tokens outside of the app, because no one will know the string to fake the tokens.
             { expiresIn: '24h' });
           // Now we send back the user id with the token we generated for him, and the status 200 (request was fulfilled)
           res.status(200).json({
