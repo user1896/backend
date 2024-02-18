@@ -23,10 +23,16 @@ module.exports = (req, res, next) => {
 			// send the userId in the body parameter in fetch(), only when we need to know that it's the right user, like deleting
 			// or updating an item.
 			// Then we compare it to the one extracted from the token (&& req.body.userId !== userId). 
-			// If they are not the same, throw an error.
+			// If they are not the same, throw the message :'Invalid user ID'.
       throw 'Invalid user ID';
     } else {
-			// else the userId is valid, so we move to the next middleware (for example user can delete his items from the store)
+			// else the "userId" is valid, so we move to the next middleware (for example user can delete his items from the store)
+
+			// The only way to know the "userId" is through the token, because he doesn't send it in the "req", so if we need this
+			// "userId" before deleting or updating an item in the next routes, we have to make it available to them, and a way
+			// to do it, is to add it to the "req" object
+			req.auth = {userId: userId} // a shorthand is : req.auth = {userId}
+			// now we can reach "userId" like this in the next routes: "req.auth.userId"
       next();
     }
   } catch {
