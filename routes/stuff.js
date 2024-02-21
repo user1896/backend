@@ -1,6 +1,7 @@
 const express = require('express');
 const stuffCtrl = require('../controllers/stuff');
 const auth = require('../middleware/auth');
+const multer = require('../middleware/multer-config');
 
 // creating an Express router, instead of registering the routes directly to the app ("app.get", "app.post", etc...).
 const router = express.Router();
@@ -8,6 +9,12 @@ const router = express.Router();
 
 // A POST route that allows the frontend to send data to the backend (ex: users put objects for sell)
 router.post('/', auth, stuffCtrl.createThing);
+
+// a POST end point that will handle stored images (it not configured yet)
+// router.post('/', auth, multer, stuffCtrl.createThing);
+// we passed "multer" as a second middleware. Our "multer" is configured to capture and store single file images in the 
+// folder: "images". Lastly we passed the controller "stuffCtrl.createThing", so the image should be already stored in the
+// folder "images" by then, the controler will store the path of the image to the database (before we stored its url).
 
 // a "get" API route to "get" data
 router.get('/', auth, stuffCtrl.getAllStuff);

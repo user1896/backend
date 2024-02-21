@@ -23,3 +23,6 @@ To encrypt the passwords we use the package "bcrypt"
 
 To implement token based authentication install the package "JSON Web Tokens" (JWT):
 * npm install jsonwebtoken
+
+Implement file uploads to allow users to upload images of items they want to sell, we intall the package "multer"
+* npm install multer
